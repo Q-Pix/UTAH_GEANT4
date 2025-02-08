@@ -1,0 +1,14 @@
+#Geometry
+/QPIX/RegisterGeometry DiffusionGeometry
+
+#Generator
+/QPIX/RegisterGenerator DiffusionGenerator
+
+#Actions
+/QPIX/RegisterTrackingAction TrackingAction
+/QPIX/RegisterEventAction EventAction
+/QPIX/RegisterRunAction RunAction
+/QPIX/RegisterSteppingAction SteppingAction
+
+#Config
+/QPIX/RegisterMacro macros/Am241_config.mac

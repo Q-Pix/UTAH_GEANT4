@@ -7,23 +7,29 @@
 // -----------------------------------------------------------------------------
 
 #include "TrackingAction.h"
-
+#include "FactoryBase.h"
 // Q-Pix includes
 #include "MCParticle.h"
 #include "MCTruthManager.h"
 
 // GEANT4 includes
 #include "G4TrackingManager.hh"
+#include <G4GenericMessenger.hh>
 
 // C++ includes
 #include <iostream>
 #include <fstream>
 
-TrackingAction::TrackingAction()
-{}
+REGISTER_CLASS(TrackingAction,G4UserTrackingAction)
+TrackingAction::TrackingAction():G4UserTrackingAction()
+{
+    msg_ = new G4GenericMessenger(this, "/Actions/TrackingAction/");
+}
 
 TrackingAction::~TrackingAction()
-{}
+{
+    delete msg_;
+}
 
 void TrackingAction::PreUserTrackingAction(const G4Track* track)
 {

@@ -1,0 +1,14 @@
+#Geometry
+/QPIX/RegisterGeometry DiffusionGeometry
+
+#Generator
+/QPIX/RegisterGenerator UTA_TPC_ParticleGenerator
+
+#Actions
+/QPIX/RegisterTrackingAction TrackingAction
+/QPIX/RegisterEventAction EventAction
+/QPIX/RegisterRunAction RunAction
+/QPIX/RegisterSteppingAction SteppingAction
+
+#Config
+/QPIX/RegisterMacro macros/electron_config.macro

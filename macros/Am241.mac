@@ -1,0 +1,6 @@
+### For Limiting Nucleous
+
+#/grdm/nucleusLimits 241 241 95 95 # this is for the old version of GEANT4_10.6
+
+/process/had/rdm/nucleusLimits 241 241 95 95 #GEANT4_11
+

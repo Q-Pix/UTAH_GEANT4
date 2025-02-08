@@ -7,21 +7,31 @@
 // -----------------------------------------------------------------------------
 
 #include "EventAction.h"
+#include "FactoryBase.h"
+#include <G4GenericMessenger.hh>
 
 // Q-Pix includes
 #include "AnalysisManager.h"
 #include "MCTruthManager.h"
+#include "RTDCodeManager.h"
 
 // GEANT4 includes
 #include "G4Event.hh"
 
+REGISTER_CLASS(EventAction,G4UserEventAction)
+EventAction::EventAction(): G4UserEventAction(),runRTDCode_(false)
+{
+    msg_ = new G4GenericMessenger(this, "/Actions/EventAction/");
+    msg_->DeclareProperty("runRTDCode",runRTDCode_ ,  "This is running RTD code to simulate diffusion");
 
-EventAction::EventAction(): G4UserEventAction()
-{}
+
+}
 
 
 EventAction::~EventAction()
-{}
+{
+    delete msg_;
+}
 
 
 void EventAction::BeginOfEventAction(const G4Event*)
@@ -32,6 +42,8 @@ void EventAction::EndOfEventAction(const G4Event* event)
 {
     // get MC truth manager
     MCTruthManager * mc_truth_manager = MCTruthManager::Instance();
+
+    RTDCodeManager * rtd=RTDCodeManager::Instance();
 
     // get analysis manager
     AnalysisManager * analysis_manager = AnalysisManager::Instance();
@@ -69,6 +81,13 @@ void EventAction::EndOfEventAction(const G4Event* event)
         
         // auto const& hmmm = p.first;
         // G4cout << "hmmm" <<"\t"<< hmmm <<  G4endl;
+    }
+
+
+    //RTD Code here
+    if(runRTDCode_){
+        std::cout<<"Running RTD Code for Event: "<< event->GetEventID()<<std::endl;
+        rtd->Diffuser();
     }
 
     // write event to ROOT file and reset event variables

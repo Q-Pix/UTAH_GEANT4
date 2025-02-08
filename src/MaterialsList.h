@@ -15,7 +15,7 @@
 #include <CLHEP/Units/PhysicalConstants.h>
 
 class G4Material;
-
+class G4NistManager;
 using namespace CLHEP;
 
 /// (This is a stateless class. All methods must be defined as static.)
@@ -75,6 +75,12 @@ static G4Material* OpticalSilicone();
 static G4Material* SeF6(G4double pressure=STP_Pressure,
             G4double temperature=STP_Temperature);
 
+
+// Gas Argon
+static G4Material* GasAr(G4double Pressure,G4double Temperature);
+
+// Aliminum
+static G4Material * Al();
 // FR4
 static G4Material* FR4();
 
@@ -103,12 +109,16 @@ static G4Material* FakeDielectric(G4Material*, G4String);
 static G4Material* Limestone();
 
 static G4Material* CopyMaterial(G4Material*, const G4String&);
-
+static G4Material * FindMaterial(const G4String Name);
 private:
-/// Constructor (hidden)
+    G4NistManager * nist ;
+
+    /// Constructor (hidden)
 MaterialsList();
 /// Destructor (hidden)
 ~MaterialsList();
+
+
 };
 
 #endif

@@ -1,0 +1,111 @@
+# set verbosity
+/control/verbose 1
+/run/verbose 1
+/tracking/verbose 0
+# output path
+#/QPIX/Action/RunAction/root_output /media/ilker/writable/Diffusion_Measurement/alpha_2cm_50Vcm_1bar_.root
+/QPIX/Action/RunAction/root_output /media/ilker/writable/Diffusion_Measurement/electron.root
+
+#/Geometry/DiffusionGeometry/MaterialName LAr
+
+
+#GEOMETRY
+/Geometry/DiffusionGeometry/world_size 1 m
+/Geometry/DiffusionGeometry/MaterialName GasAr
+/Geometry/DiffusionGeometry/Pressure 1 bar
+/Geometry/DiffusionGeometry/Temperature 293.15 kelvin
+
+
+
+## Detector Dimensions
+/Geometry/DiffusionGeometry/Det_rmin 0 cm
+/Geometry/DiffusionGeometry/Det_rmax 40 cm
+/Geometry/DiffusionGeometry/Det_z 12 cm
+
+### Detector Active Area
+/Geometry/DiffusionGeometry/DetAct_rmin 0 cm
+/Geometry/DiffusionGeometry/DetAct_rmax 3 cm
+/Geometry/DiffusionGeometry/DetAct_z 5.5 cm
+
+### Source Holder Dimensions
+/Geometry/DiffusionGeometry/HideSourceHolder true
+/Geometry/DiffusionGeometry/SourceHolder_rmin 0 cm
+/Geometry/DiffusionGeometry/SourceHolder_rmax 0.5 cm
+/Geometry/DiffusionGeometry/SourceHolder_z 0.2 cm
+
+#### Position of the Source
+/Geometry/DiffusionGeometry/vtx 4 4 5.5 cm
+
+### Offset for active region
+/Geometry/DiffusionGeometry/offset 4 4 5.5 cm
+
+
+# limit radioactive decay chains
+# use if needed
+#/grdm/nucleusLimits 1 35 1 17  # aMin aMax zMin zMax
+/random/setSeeds 0 31
+
+
+# particle type
+# e-, e+, mu-, mu+, neutron, proton, anti_proton, pi-, pi+, pi0, kaon-, kaon+,
+# gamma, opticalphoton, ...
+
+### Generator Related Settings
+/gps/particle e-
+/gps/direction -1 0 0
+
+# energy distribution
+/gps/ene/mono 0.546 MeV ## Sr90
+#/gps/ene/mono 5.4 MeV ## Am-241
+
+
+# spherical volume source
+#/gps/pos/type Volume
+#/gps/pos/shape Sphere
+#/gps/pos/centre  4 5 cm
+#/gps/pos/radius 0.01 cm
+
+# Particle as Point Source
+#/gps/pos/type Point
+#/gps/pos/centre 4 4 10.5 cm
+
+# Circular Source
+/gps/pos/type Plane
+/gps/pos/shape Circle
+/gps/pos/centre 7 4 10 cm
+/gps/pos/radius 0.04 cm
+
+
+
+# Run RTD_Code for Diffusion and Current Profiles
+/Actions/EventAction/runRTDCode false
+
+### Variables for Diffusion and Current in the Liquid
+#/Actions/RTDManager/Wvalue 23.6
+#/Actions/RTDManager/E_vel 164800.0
+#/Actions/RTDManager/DiffusionL 6.8223
+#/Actions/RTDManager/DiffusionT 13.1586
+#/Actions/RTDManager/Life_Time 0.1
+#/Actions/RTDManager/Reset 6250
+#/Actions/RTDManager/SampleTime 10e-9
+#/Actions/RTDManager/BufferTime 100e-6
+#/Actions/RTDManager/SensorPos 2 2 7.5 cm
+#/Actions/RTDManager/NumOfSensors 1
+#/Actions/RTDManager/SensorSpacing 1 mm
+#/Actions/RTDManager/SensorWidth 1 mm
+
+### Variables for Diffusion and Current in the GAS 50 V/cm
+/Actions/RTDManager/Wvalue 26.4 # eV
+/Actions/RTDManager/E_vel 196300 # cm/s
+/Actions/RTDManager/DiffusionL 1488.146 #cm^2/s
+/Actions/RTDManager/DiffusionT 8184.632 #cm^2/s
+/Actions/RTDManager/Life_Time 0.1
+/Actions/RTDManager/Reset 6250
+/Actions/RTDManager/SampleTime 10e-9
+/Actions/RTDManager/BufferTime 100e-6
+/Actions/RTDManager/SensorPos 2 2 7.5 cm
+/Actions/RTDManager/NumOfSensors 1
+/Actions/RTDManager/SensorSpacing 1 mm
+/Actions/RTDManager/SensorWidth 1 mm
+
+

@@ -10,6 +10,7 @@
 #define TRACKING_ACTION_H 1
 
 #include "G4UserTrackingAction.hh"
+class G4GenericMessenger;
 
 class TrackingAction : public G4UserTrackingAction
 {
@@ -19,6 +20,10 @@ class TrackingAction : public G4UserTrackingAction
 
         void PreUserTrackingAction(const G4Track*);
         void PostUserTrackingAction(const G4Track*);
+
+private:
+    G4GenericMessenger *msg_;
+
 };
 
 #endif

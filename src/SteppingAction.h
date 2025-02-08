@@ -10,7 +10,7 @@
 #define STEPPING_ACTION_H
 
 #include <G4UserSteppingAction.hh>
-
+#include "G4GenericMessenger.hh"
 
 class SteppingAction: public G4UserSteppingAction
 {
@@ -18,6 +18,9 @@ class SteppingAction: public G4UserSteppingAction
     SteppingAction();
     virtual ~SteppingAction();
     virtual void UserSteppingAction(const G4Step*);
+
+private:
+    G4GenericMessenger * msg_;
 };
 
 #endif

@@ -475,6 +475,40 @@ G4Material* MaterialsList::FakeDielectric(G4Material* model_mat, G4String name)
 }
 
 
+// For Argon Gas
+G4Material* MaterialsList::GasAr(G4double Pressure, G4double Temperature) {
+    G4String name="GasAr";
+    G4Material *mat =G4Material::GetMaterial(name,false);
+    if (mat == 0) {
+        G4NistManager* nist = G4NistManager::Instance();
+
+        G4Element* Ar = nist->FindOrBuildElement("Ar");
+        //1.664 g/L
+        mat = new G4Material(name, 1.78*(g/L), 1, kStateGas,Temperature,Pressure);
+        mat->AddElement(Ar, 40);
+
+    }
+
+    return mat;
+}
+
+// For Alimunim
+G4Material* MaterialsList::Al() {
+    G4String name="Al";
+    G4Material *mat =G4Material::GetMaterial(name,false);
+    if (mat == 0) {
+        G4NistManager* nist = G4NistManager::Instance();
+
+        G4Element* Al = nist->FindOrBuildElement("Al");
+
+        mat = new G4Material(name, 2.7*g/cm3, 1, kStateSolid);
+        mat->AddElement(Al, 13);
+    }
+
+    return mat;
+}
+
+
 
 G4Material* MaterialsList::TPH()
 {
@@ -639,4 +673,14 @@ G4Material* MaterialsList::PEDOT()
   }
 
   return material;
+}
+
+G4Material * MaterialsList::FindMaterial(const G4String Name) {
+    G4NistManager * nist =G4NistManager::Instance();
+    G4Material *mat =nist->FindMaterial(Name);
+    if (!mat){
+        G4cout << "Could not find the material -> "<< Name << " Please look at MaterialList" <<G4endl;
+        return 0;
+    }
+    return  mat;
 }

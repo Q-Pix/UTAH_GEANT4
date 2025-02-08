@@ -1,0 +1,89 @@
+#Geometry
+/QPIX/RegisterGeometry DiffusionGeometry
+
+#Generator
+/QPIX/RegisterGenerator DiffusionGenerator
+
+#Actions
+/QPIX/RegisterTrackingAction TrackingAction
+/QPIX/RegisterEventAction EventAction
+/QPIX/RegisterRunAction RunAction
+/QPIX/RegisterSteppingAction SteppingAction
+
+
+# set verbosity
+/control/verbose 1
+/run/verbose 1
+/tracking/verbose 0
+
+
+# output path to root file
+#/QPIX/Action/RunAction/root_output /home/ilker/Projects/Diffusion/output/Am241_Gas_7cm.root
+
+#RegisterDelayed Macro for delaying Nucleous
+/QPIX/RegisterDelayedMacro macros/Am241.mac
+
+/random/setSeeds 0 31
+
+
+#GEOMETRY
+/Geometry/DiffusionGeometry/world_size 55 cm
+/Geometry/DiffusionGeometry/MaterialName GasAr
+#/Geometry/DiffusionGeometry/MaterialName LAr
+/Geometry/DiffusionGeometry/Pressure 30 bar
+/Geometry/DiffusionGeometry/Temperature 293.15 kelvin
+
+## Detector Dimensions
+/Geometry/DiffusionGeometry/Det_rmin 0 cm
+/Geometry/DiffusionGeometry/Det_rmax 10 cm
+/Geometry/DiffusionGeometry/Det_z 10 cm
+
+### Detector Active Area
+/Geometry/DiffusionGeometry/DetAct_rmin 0 cm
+/Geometry/DiffusionGeometry/DetAct_rmax 4 cm
+/Geometry/DiffusionGeometry/DetAct_z 4 cm
+
+### Source Holder Dimensions
+/Geometry/DiffusionGeometry/SourceHolder_rmin 0 cm
+/Geometry/DiffusionGeometry/SourceHolder_rmax 0.5 cm
+/Geometry/DiffusionGeometry/SourceHolder_z 0.2 cm
+
+#### Position of the Source
+/Geometry/DiffusionGeometry/vtx 4 4 7 cm
+
+### Offset for active region
+/Geometry/DiffusionGeometry/offset 4 4 4 cm
+
+
+
+# GENERATOR
+# make unstable isotopes decay at t=0
+/Generator/DiffusionGenerator/decay_at_time_zero true  # this is set to false by default
+
+#Am 241
+/Generator/DiffusionGenerator/Region detectorActive.logical
+/Generator/DiffusionGenerator/AtomicNumber 95
+/Generator/DiffusionGenerator/AtomicMass 241
+
+# 1 microcurie --> 37000 Decays/s(Bq)
+/Generator/DiffusionGenerator/DecayRate 1
+/Generator/DiffusionGenerator/EventWindow 1   # seconds
+#works only if event_window is zero
+#/Generator/DiffusionGenerator/NDecays 39
+
+
+# Run RTD_Code for Diffusion and Current Profiles
+/Actions/EventAction/runRTDCode true
+
+### Variables for Diffusion and Current
+/Actions/RTDManager/Wvalue 23.6
+/Actions/RTDManager/E_vel 164800.0
+/Actions/RTDManager/DiffusionL 6.8223
+/Actions/RTDManager/DiffusionT 13.1586
+/Actions/RTDManager/Life_Time 0.1
+/Actions/RTDManager/Reset 6250
+/Actions/RTDManager/SampleTime 1e-9
+/Actions/RTDManager/BufferTime 100e-6
+/run/initialize
+
+/run/beamOn 1000

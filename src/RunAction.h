@@ -24,7 +24,7 @@ class RunAction: public G4UserRunAction
 
     private:
 
-        G4GenericMessenger * messenger_;
+        G4GenericMessenger * msg_;
         G4String root_output_path_;
 };
 

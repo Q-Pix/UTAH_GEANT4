@@ -26,12 +26,15 @@ class PrimaryGeneration : public G4VUserPrimaryGeneratorAction
 {
 
   public:
-
     PrimaryGeneration();
-    virtual ~PrimaryGeneration();
-    virtual void GeneratePrimaries(G4Event*);
+     ~PrimaryGeneration();
+     void GeneratePrimaries(G4Event*);
+     ///Returns a pointer to the primary generator
+    const G4VPrimaryGenerator* GetGenerator() const;
+    void SetGenerator(G4VPrimaryGenerator*);
 
-  protected:
+
+protected:
 
     // GEANT4 dictionary of particles
     G4ParticleTable* particle_table_;
@@ -39,19 +42,14 @@ class PrimaryGeneration : public G4VUserPrimaryGeneratorAction
   private:
 
     G4GenericMessenger* msg_; // Messenger for configuration parameters
-    G4String Particle_Type_;
-    G4String Detector_Geometry_;
-    
-    bool decay_at_time_zero_;
-
-    G4GeneralParticleSource * particle_gun_;
-
-    double detector_length_x_;
-    double detector_length_y_;
-    double detector_length_z_;
-
-    G4Box* detector_solid_vol_;
+    G4VPrimaryGenerator* generator_;
 
 };
+
+inline void PrimaryGeneration::SetGenerator(G4VPrimaryGenerator* pg)
+{ generator_ = pg; }
+
+inline const G4VPrimaryGenerator* PrimaryGeneration::GetGenerator() const
+{ return generator_; }
 
 #endif

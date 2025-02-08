@@ -7,20 +7,24 @@
 // -----------------------------------------------------------------------------
 
 #include "SteppingAction.h"
-
+#include "FactoryBase.h"
+#include "G4GenericMessenger.hh"
 
 #include "AnalysisManager.h"
 #include "G4VProcess.hh"
 
 #include <G4OpticalPhoton.hh>
 
+REGISTER_CLASS(SteppingAction,G4UserSteppingAction)
 SteppingAction::SteppingAction(): G4UserSteppingAction()
 {
+    msg_ = new G4GenericMessenger(this, "/Actions/SteppingAction/");
 }
 
 
 SteppingAction::~SteppingAction()
 {
+    delete msg_;
 }
 
 

@@ -55,15 +55,14 @@ G4MaterialPropertiesTable* OpticalMaterialProperties::OpticalLAr()
   LAr_mpt->AddProperty("FASTCOMPONENT", sc_energy.data(), intensity.data(), sc_energy.size());
   LAr_mpt->AddProperty("SLOWCOMPONENT", sc_energy.data(), intensity.data(), sc_energy.size());
 
-  // LAr_mpt->AddConstProperty("SCINTILLATIONYIELD", 51282.1/MeV);
-  LAr_mpt->AddConstProperty("SCINTILLATIONYIELD", 2./MeV);
+  //LAr_mpt->AddConstProperty("SCINTILLATIONYIELD", 51282.1/MeV);
+  LAr_mpt->AddConstProperty("SCINTILLATIONYIELD", 2/MeV);
   LAr_mpt->AddConstProperty("RESOLUTIONSCALE", 1);
   LAr_mpt->AddConstProperty("RAYLEIGH", 95.*cm);
   LAr_mpt->AddConstProperty("FASTTIMECONSTANT", 6.*ns);
   LAr_mpt->AddConstProperty("SLOWTIMECONSTANT", 1590.*ns);
-
-  // LAr_mpt->AddConstProperty("IONIZATIONENERGY", 42372.9/MeV);
-  // LAr_mpt->AddConstProperty("FANOFACTOR", 0.107);
+  //LAr_mpt->AddConstProperty("IONIZATIONYIELD", 42372.9/MeV);
+  LAr_mpt->AddConstProperty("FANOFACTOR", 0.107);
   // for (int i=0; i<100; ++i){G4cout << "MAT" <<"\t"<< LAr_mpt->GetConstProperty("IONIZATIONENERGY") <<  G4endl;} 
 
   // Yeild ratio from here

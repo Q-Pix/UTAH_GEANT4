@@ -12,6 +12,6 @@ target_include_directories(G4_QPIX PRIVATE ${CMAKE_SOURCE_DIR}/src)
 target_link_libraries(G4_QPIX ${Geant4_LIBRARIES} )
 
 ## Added for marley
-target_link_libraries(G4_QPIX MARLEY)
+#target_link_libraries(G4_QPIX MARLEY)
 
 install(TARGETS G4_QPIX RUNTIME DESTINATION bin)

@@ -11,24 +11,32 @@
 
 #include "G4VUserDetectorConstruction.hh"
 
-class G4Material;
 class G4GenericMessenger;
 class G4MaterialPropertiesTable;
-
+class BaseGeometry;
 class DetectorConstruction: public G4VUserDetectorConstruction
 {
 public:
-  DetectorConstruction();
-  virtual ~DetectorConstruction();
+    DetectorConstruction();
+    ~DetectorConstruction();
+    virtual G4VPhysicalVolume* Construct();
+    void SetGeometry(BaseGeometry*);
+    virtual void ConstructSDandField();
+
+    const BaseGeometry * GetGeometry() const;
+
+    G4MaterialPropertiesTable* GetMyPhotOptSurf();
 private:
-  virtual G4VPhysicalVolume* Construct();
-  virtual void ConstructSDandField();
+    BaseGeometry * geo_;
 
-  G4MaterialPropertiesTable* GetMyPhotOptSurf();
-
-  // G4GenericMessenger * messenger_;
   // G4String Detector_Geometry_;
 
 };
+inline void DetectorConstruction::SetGeometry(BaseGeometry* g)
+{ geo_ = g; }
+
+inline const BaseGeometry* DetectorConstruction::GetGeometry() const
+{ return geo_; }
+
 
 #endif
